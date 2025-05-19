@@ -124,6 +124,13 @@
       <button id="btn-en" class="active" onclick="setLang('en')">English</button>
       <button id="btn-ne" onclick="setLang('ne')">नेपाली</button>
     </div>
+
+    <div style="margin-top:0.8rem">
+  <button class="btn" onclick="openModal('contactModal')">
+    <i class="fa-solid fa-phone"></i> <span class="lang lang-en">Contact</span><span class="lang lang-ne" style="display:none;">सम्पर्क</span>
+  </button>
+</div>
+
   </header>
 
   <!-- Quick-pay / share buttons -->
@@ -258,17 +265,25 @@
       </div>
 
     </div><!-- /menu-flex -->
+     
   </section>
+<div style="text-align:center;margin-top:1.5rem">
+  <button class="btn" onclick="openModal('contactModal')">
+    <i class="fa-solid fa-phone"></i> <span class="lang lang-en">Contact</span><span class="lang lang-ne" style="display:none;">सम्पर्क</span>
+  </button>
+  <button class="btn" onclick="openModal('shareModal')">
+    <i class="fa-solid fa-share-nodes"></i> <span class="lang lang-en">Get menu QR</span><span class="lang lang-ne" style="display:none;">मेनु QR लिनुहोस्</span>
+  </button>
+</div>
 
   <!-- Footer -->
-  <footer>
-    <p>
-      <span class="lang lang-en">Crafted with &#10084; for Mo:Moz | Developed by </span>
-      <span class="lang lang-ne" style="display:none;">म:मोजका लागि &#10084; साथ बनाइएको | विकासकर्ता </span>
-      <a href="https://fitandfine.github.io/anup" target="_blank">Anup</a> |
-      <a href="#" onclick="openModal('contactModal')"><i class="fa-solid fa-phone"></i> Contact</a>
-    </p>
-  </footer>
+ <footer>
+  <p>
+    Crafted with &#10084; for Mo:Moz | Developed by 
+    <a href="https://fitandfine.github.io/anup" target="_blank">Anup</a>
+  </p>
+</footer>
+
 
   <!-- ================= Modals ================= -->
   <!-- Payment QR -->
@@ -287,19 +302,25 @@
     <p class="lang lang-ne" style="display:none;">यो मेनु मित्रहरूलाई सेयर गर्नुहोस् !</p>
   </div></div>
 
-  <!-- Contact -->
-  <div id="contactModal" class="modal"><div class="modal-content">
-    <span class="close" onclick="closeModal('contactModal')">&times;</span>
-    <h3 style="margin-bottom:.6rem" class="lang lang-en">Call / Message Us</h3>
-    <h3 style="margin-bottom:.6rem;display:none" class="lang lang-ne">सम्पर्क&nbsp;गर्नुहोस्</h3>
-    <p style="font-weight:600">+977&nbsp;98XXXXXXXX</p>
-    <button class="btn" onclick="window.location.href='tel:+97798XXXXXXXX'">
-      <i class="fa-solid fa-phone"></i> <span class="lang lang-en">Call</span><span class="lang lang-ne" style="display:none;">कल</span>
-    </button>
-    <button class="btn" onclick="window.location.href='sms:+97798XXXXXXXX'">
-      <i class="fa-solid fa-message"></i> <span class="lang lang-en">SMS</span><span class="lang lang-ne" style="display:none;">एसएमएस</span>
-    </button>
-  </div></div>
+<!-- Contact -->
+<div id="contactModal" class="modal"><div class="modal-content">
+  <span class="close" onclick="closeModal('contactModal')">&times;</span>
+  <h3 style="margin-bottom:.6rem" class="lang lang-en">Contact Us</h3>
+  <h3 style="margin-bottom:.6rem;display:none" class="lang lang-ne">सम्पर्क&nbsp;गर्नुहोस्</h3>
+  <p style="font-weight:600">+977 9800000000</p>
+
+  <button class="btn" onclick="window.location.href='tel:+9779800000000'">
+    <i class="fa-solid fa-phone"></i> Call
+  </button>
+  <button class="btn" onclick="window.location.href='sms:+9779800000000'">
+    <i class="fa-solid fa-message"></i> SMS
+  </button>
+  <button class="btn" onclick="window.open('https://wa.me/9779800000000')">
+    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+  </button>
+ 
+</div></div>
+
 
   <!-- ================= Scripts ================= -->
   <script>
