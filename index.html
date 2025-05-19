@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--  Mo:Moz – Selfie Food Café, Dhumbarahi (Bilingual EN / NP)  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mo:Moz | Selfie Food Cafe – Menu</title>
+
+  <!-- Google Fonts + Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    /*  Palette is sampled from the flower-frame images  */
+    :root{
+      --sky:#e3effd;          /* paper-blue background  */
+      --iris:#6674db;         /* primary accent          */
+      --iris-dark:#4c53b3;
+      --lavender:#b9c0ff;     /* soft borders / badges   */
+      --surface:#ffffff;      /* cards                   */
+      --text:#222;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:Poppins,Arial,Helvetica,sans-serif;
+      background:var(--sky);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:inherit;text-decoration:none}
+    /* -------- Header -------- */
+    header{
+      background:var(--iris);
+      color:#fff;
+      padding:1rem .5rem 1.2rem;
+      text-align:center;
+      box-shadow:0 2px 6px rgba(0,0,0,.15);
+    }
+    header h1{font-weight:600;font-size:1.75rem;letter-spacing:.5px}
+    header p{font-size:.95rem;font-weight:300;margin:.25rem 0 .7rem}
+    .lang-toggle button{
+      background:#fff;color:var(--iris);
+      border:none;border-radius:18px;padding:.35rem .9rem;
+      margin:0 .25rem;font-weight:600;cursor:pointer;
+      transition:.2s;
+    }
+    .lang-toggle button.active,
+    .lang-toggle button:hover{background:var(--lavender)}
+    /* -------- Info strip (fixed) -------- */
+    .strip{
+      position:fixed;top:0;left:0;width:100%;z-index:2000;
+      background:#c62828;color:#fff;font-size:.85rem;
+      padding:.3rem 0;text-align:center;letter-spacing:.3px;
+    }
+    /* Push rest of page below the strip */
+    .pad-strip{margin-top:1.45rem}
+    /* -------- Section wrappers -------- */
+    .wrapper{width:min(960px,94%);margin:1.4rem auto}
+    /* -------- Menu cards -------- */
+    .menu-flex{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+    .card{
+      background:var(--surface);border:2px solid var(--lavender);
+      border-radius:10px;flex:1 1 280px;max-width:360px;
+      padding:1rem .9rem 1.2rem;box-shadow:0 1px 4px rgba(0,0,0,.05)
+    }
+    .card h3{
+      font-size:1.25rem;font-weight:600;color:var(--iris-dark);
+      border-bottom:2px solid var(--lavender);display:inline-block;
+      padding-bottom:.25rem;margin-bottom:.6rem
+    }
+    .item{display:flex;justify-content:space-between;font-size:.95rem;margin:.3rem 0}
+    .price{font-weight:600;color:var(--iris-dark)}
+    /* -------- CTA buttons -------- */
+    .btn{
+      display:inline-block;background:var(--iris);
+      color:#fff;padding:.55rem 1.2rem;border-radius:26px;
+      font-size:.95rem;font-weight:600;margin:.3rem;
+      box-shadow:0 2px 4px rgba(0,0,0,.15);cursor:pointer;border:none
+    }
+    .btn:hover{background:var(--iris-dark)}
+    /* -------- Footer -------- */
+    footer{
+      background:var(--iris);color:#fff;text-align:center;
+      padding:1rem .5rem;margin-top:2rem;font-size:.9rem
+    }
+    footer a{color:#fff;font-weight:600}
+    /* -------- Modals -------- */
+    .modal{
+      display:none;position:fixed;z-index:5000;left:0;top:0;width:100%;height:100%;
+      background:rgba(0,0,0,.6);align-items:center;justify-content:center
+    }
+    .modal-content{
+      background:#fff;border-radius:10px;padding:1rem 1.2rem;
+      width:min(320px,90%);text-align:center;position:relative
+    }
+    .modal-content img{width:92%;margin:.6rem auto;border-radius:6px}
+    .close{
+      position:absolute;top:.4rem;right:.8rem;font-size:1.4rem;
+      cursor:pointer;color:#666
+    }
+    @media(max-width:600px){
+      header h1{font-size:1.55rem}
+      .card{max-width:100%}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Allergy warning strip -->
+  <div class="strip">
+    <span class="lang lang-en">Allergy alert — kindly tell us if you have any food allergies before ordering.</span>
+    <span class="lang lang-ne" style="display:none;">यदि तपाईंलाई कुनै खानेकुरामा एलर्जी छ भने अर्डर गर्नु अघि कृपया जानकारी दिनुहोस् ।</span>
+  </div>
+<br>
+<br>
+  <!-- Header -->
+  <header class="pad-strip">
+    <h1 class="lang lang-en">Mo:Moz – Selfie Food Cafe</h1>
+    <h1 class="lang lang-ne" style="display:none;">मो:मोज – सेल्फी फुड क्याफे</h1>
+    <p class="lang lang-en">Authentic flavours in Dhumbarahi, Kathmandu</p>
+    <p class="lang lang-ne" style="display:none;">धुम्बाराही, काठमाडौंमा नेपाली स्वाद</p>
+
+    <div class="lang-toggle">
+      <button id="btn-en" class="active" onclick="setLang('en')">English</button>
+      <button id="btn-ne" onclick="setLang('ne')">नेपाली</button>
+    </div>
+  </header>
+
+  <!-- Quick-pay / share buttons -->
+  <div style="text-align:center;margin-top:1.2rem">
+    <button class="btn" onclick="openModal('payModal')">
+      <i class="fa-solid fa-qrcode"></i> <span class="lang lang-en">Pay with eSewa</span><span class="lang lang-ne" style="display:none;">eSewa मार्फत भुक्तानी</span>
+    </button>
+    <button class="btn" onclick="openModal('shareModal')">
+      <i class="fa-solid fa-share-nodes"></i> <span class="lang lang-en">Get menu QR</span><span class="lang lang-ne" style="display:none;">मेनु QR लिनुहोस्</span>
+    </button>
+  </div>
+
+  <!-- MENU ================================================= -->
+  <section class="wrapper">
+    <h2 style="text-align:center;font-size:1.55rem;margin-bottom:.8rem;color:var(--iris-dark)">
+      <span class="lang lang-en">Our Menu</span>
+      <span class="lang lang-ne" style="display:none;">हाम्रो मेनु</span>
+    </h2>
+
+    <div class="menu-flex">
+
+      <!-- Mo:Mo -------------------------------------------------------->
+      <div class="card">
+        <h3><span class="lang lang-en">Mo:Mo</span><span class="lang lang-ne" style="display:none;">मो:मो</span></h3>
+        <div class="item"><span class="lang lang-en">Veg</span><span class="lang lang-ne" style="display:none;">भेज</span><span class="price lang-en">110</span><span class="price lang-ne" style="display:none;">११०</span></div>
+        <div class="item"><span class="lang lang-en">Buff</span><span class="lang lang-ne" style="display:none;">बफ</span><span class="price lang-en">130</span><span class="price lang-ne" style="display:none;">१३०</span></div>
+        <div class="item"><span class="lang lang-en">Chicken</span><span class="lang lang-ne" style="display:none;">चिकन</span><span class="price lang-en">150</span><span class="price lang-ne" style="display:none;">१५०</span></div>
+        <div class="item"><span class="lang lang-en">Pork</span><span class="lang lang-ne" style="display:none;">पोर्क</span><span class="price lang-en">170</span><span class="price lang-ne" style="display:none;">१७०</span></div>
+      </div>
+
+      <!-- Chowmin ------------------------------------------------------>
+      <div class="card">
+        <h3><span class="lang lang-en">Chowmin</span><span class="lang lang-ne" style="display:none;">चाउमिन</span></h3>
+        <div class="item"><span class="lang lang-en">Veg</span><span class="lang lang-ne" style="display:none;">भेज</span><span class="price lang-en">100</span><span class="price lang-ne" style="display:none;">१००</span></div>
+        <div class="item"><span class="lang lang-en">Buff</span><span class="lang lang-ne" style="display:none;">बफ</span><span class="price lang-en">130</span><span class="price lang-ne" style="display:none;">१३०</span></div>
+        <div class="item"><span class="lang lang-en">Chicken</span><span class="lang lang-ne" style="display:none;">चिकन</span><span class="price lang-en">150</span><span class="price lang-ne" style="display:none;">१५०</span></div>
+        <div class="item"><span class="lang lang-en">Mix</span><span class="lang lang-ne" style="display:none;">मिक्स</span><span class="price lang-en">170</span><span class="price lang-ne" style="display:none;">१७०</span></div>
+      </div>
+
+      <!-- Fry Rice ----------------------------------------------------->
+      <div class="card">
+        <h3><span class="lang lang-en">Fry Rice</span><span class="lang lang-ne" style="display:none;">फ्राई राइस</span></h3>
+        <div class="item"><span class="lang lang-en">Veg</span><span class="lang lang-ne" style="display:none;">भेज</span><span class="price lang-en">100</span><span class="price lang-ne" style="display:none;">१००</span></div>
+        <div class="item"><span class="lang lang-en">Buff</span><span class="lang lang-ne" style="display:none;">बफ</span><span class="price lang-en">120</span><span class="price lang-ne" style="display:none;">१२०</span></div>
+        <div class="item"><span class="lang lang-en">Chicken / Egg</span><span class="lang lang-ne" style="display:none;">चिकन/अण्डा</span><span class="price lang-en">150</span><span class="price lang-ne" style="display:none;">१५०</span></div>
+        <div class="item"><span class="lang lang-en">Mix</span><span class="lang lang-ne" style="display:none;">मिक्स</span><span class="price lang-en">170</span><span class="price lang-ne" style="display:none;">१७०</span></div>
+      </div>
+
+      <!-- Noodles ------------------------------------------------------->
+      <div class="card">
+        <h3><span class="lang lang-en">Noodles</span><span class="lang lang-ne" style="display:none;">नूडल्स</span></h3>
+        <div class="item"><span class="lang lang-en">Wai-Wai Sadheko</span><span class="lang lang-ne" style="display:none;">वाईवाई साधेको</span><span class="price lang-en">80</span><span class="price lang-ne" style="display:none;">८०</span></div>
+        <div class="item"><span class="lang lang-en">Buff Keema</span><span class="lang lang-ne" style="display:none;">बफ किमा</span><span class="price lang-en">120</span><span class="price lang-ne" style="display:none;">१२०</span></div>
+        <div class="item"><span class="lang lang-en">Chicken Keema</span><span class="lang lang-ne" style="display:none;">चिकन किमा</span><span class="price lang-en">150</span><span class="price lang-ne" style="display:none;">१५०</span></div>
+      </div>
+
+      <!-- Chat-Pate ----------------------------------------------------->
+      <div class="card">
+        <h3><span class="lang lang-en">Chat-Pate</span><span class="lang lang-ne" style="display:none;">चटपटे</span></h3>
+        <div class="item"><span class="lang lang-en">Plain</span><span class="lang lang-ne" style="display:none;">सादा</span><span class="price lang-en">60</span><span class="price lang-ne" style="display:none;">६०</span></div>
+        <div class="item"><span class="lang lang-en">Buff</span><span class="lang lang-ne" style="display:none;">बफ</span><span class="price lang-en">120</span><span class="price lang-ne" style="display:none;">१२०</span></div>
+        <div class="item"><span class="lang lang-en">Chicken</span><span class="lang lang-ne" style="display:none;">चिकन</span><span class="price lang-en">150</span><span class="price lang-ne" style="display:none;">१५०</span></div>
+      </div>
+
+      <!-- Thukpa -------------------------------------------------------->
+      <div class="card">
+        <h3><span class="lang lang-en">Thukpa</span><span class="lang lang-ne" style="display:none;">थुक्पा</span></h3>
+        <div class="item"><span class="lang lang-en">Veg</span><span class="lang lang-ne" style="display:none;">भेज</span><span class="price lang-en">80</span><span class="price lang-ne" style="display:none;">८०</span></div>
+        <div class="item"><span class="lang lang-en">Buff</span><span class="lang lang-ne" style="display:none;">बफ</span><span class="price lang-en">100</span><span class="price lang-ne" style="display:none;">१००</span></div>
+        <div class="item"><span class="lang lang-en">Chicken</span><span class="lang lang-ne" style="display:none;">चिकन</span><span class="price lang-en">120</span><span class="price lang-ne" style="display:none;">१२०</span></div>
+        <div class="item"><span class="lang lang-en">Mixed</span><span class="lang lang-ne" style="display:none;">मिक्स</span><span class="price lang-en">150</span><span class="price lang-ne" style="display:none;">१५०</span></div>
+      </div>
+
+      <!-- Chhoyala / Chiura ------------------------------------------->
+      <div class="card">
+        <h3><span class="lang lang-en">Chhoyala &amp; Chiura</span><span class="lang lang-ne" style="display:none;">छ्योला / चिउरा</span></h3>
+        <div class="item"><span class="lang lang-en">Buff Chhoyala</span><span class="lang lang-ne" style="display:none;">बफ छ्योला</span><span class="price lang-en">200</span><span class="price lang-ne" style="display:none;">२००</span></div>
+        <div class="item"><span class="lang lang-en">Chicken Chhoyala</span><span class="lang lang-ne" style="display:none;">चिकन छ्योला</span><span class="price lang-en">220</span><span class="price lang-ne" style="display:none;">२२०</span></div>
+        <div class="item"><span class="lang lang-en">Chicken Sadheko</span><span class="lang lang-ne" style="display:none;">चिकन साधेको</span><span class="price lang-en">220</span><span class="price lang-ne" style="display:none;">२२०</span></div>
+        <div class="item"><span class="lang lang-en">Masu Chiura</span><span class="lang lang-ne" style="display:none;">मासु चिउरा</span><span class="price lang-en">250</span><span class="price lang-ne" style="display:none;">२५०</span></div>
+        <div class="item"><span class="lang lang-en">Vutan Chiura</span><span class="lang lang-ne" style="display:none;">भुटन चिउरा</span><span class="price lang-en">100</span><span class="price lang-ne" style="display:none;">१००</span></div>
+      </div>
+
+      <!-- Food Menu / Snacks ------------------------------------------>
+      <div class="card">
+        <h3><span class="lang lang-en">Quick Bites</span><span class="lang lang-ne" style="display:none;">हल्का&nbsp;खाना</span></h3>
+        <div class="item"><span class="lang lang-en">Chana</span><span class="lang lang-ne" style="display:none;">चना</span><span class="price lang-en">50</span><span class="price lang-ne" style="display:none;">५०</span></div>
+        <div class="item"><span class="lang lang-en">Aloo</span><span class="lang lang-ne" style="display:none;">आलु</span><span class="price lang-en">50</span><span class="price lang-ne" style="display:none;">५०</span></div>
+        <div class="item"><span class="lang lang-en">Boiled Egg</span><span class="lang lang-ne" style="display:none;">उसिनेको अण्डा</span><span class="price lang-en">30</span><span class="price lang-ne" style="display:none;">३०</span></div>
+        <div class="item"><span class="lang lang-en">Omlet</span><span class="lang lang-ne" style="display:none;">अमलेट</span><span class="price lang-en">40</span><span class="price lang-ne" style="display:none;">४०</span></div>
+        <div class="item"><span class="lang lang-en">Jhol Tarkari</span><span class="lang lang-ne" style="display:none;">झोल तरकारी</span><span class="price lang-en">40</span><span class="price lang-ne" style="display:none;">४०</span></div>
+        <div class="item"><span class="lang lang-en">Alu Paratha</span><span class="lang lang-ne" style="display:none;">आलु पराठा</span><span class="price lang-en">70</span><span class="price lang-ne" style="display:none;">७०</span></div>
+        <div class="item"><span class="lang lang-en">Alu Stick</span><span class="lang lang-ne" style="display:none;">आलु स्टिक</span><span class="price lang-en">100</span><span class="price lang-ne" style="display:none;">१००</span></div>
+      </div>
+
+      <!-- Sausage ------------------------------------------------------->
+      <div class="card">
+        <h3><span class="lang lang-en">Sausage</span><span class="lang lang-ne" style="display:none;">ससेज</span></h3>
+        <div class="item"><span class="lang lang-en">Buff</span><span class="lang lang-ne" style="display:none;">बफ</span><span class="price lang-en">30</span><span class="price lang-ne" style="display:none;">३०</span></div>
+        <div class="item"><span class="lang lang-en">Chicken</span><span class="lang lang-ne" style="display:none;">चिकन</span><span class="price lang-en">40</span><span class="price lang-ne" style="display:none;">४०</span></div>
+      </div>
+
+      <!-- Khana --------------------------------------------------------->
+      <div class="card">
+        <h3><span class="lang lang-en">Khana&nbsp;<small>(Pre-order)</small></span><span class="lang lang-ne" style="display:none;">खाना&nbsp;<small>(अगाडि अर्डर)</small></span></h3>
+        <div class="item"><span class="lang lang-en">Veg Khana</span><span class="lang lang-ne" style="display:none;">भेज खाना</span><span class="price lang-en">200</span><span class="price lang-ne" style="display:none;">२००</span></div>
+        <div class="item"><span class="lang lang-en">Chicken Khana</span><span class="lang lang-ne" style="display:none;">चिकन खाना</span><span class="price lang-en">250</span><span class="price lang-ne" style="display:none;">२५०</span></div>
+        <div class="item"><span class="lang lang-en">Mutton Khana</span><span class="lang lang-ne" style="display:none;">मटन खाना</span><span class="price lang-en">350</span><span class="price lang-ne" style="display:none;">३५०</span></div>
+      </div>
+
+      <!-- Tea / Coffee / Cold Drinks ----------------------------------->
+      <div class="card">
+        <h3><span class="lang lang-en">Tea &amp; Coffee</span><span class="lang lang-ne" style="display:none;">चिया / कफी</span></h3>
+        <div class="item"><span class="lang lang-en">Black Tea</span><span class="lang lang-ne" style="display:none;">कालो चिया</span><span class="price lang-en">20</span><span class="price lang-ne" style="display:none;">२०</span></div>
+        <div class="item"><span class="lang lang-en">Milk Tea</span><span class="lang lang-ne" style="display:none;">दूध चिया</span><span class="price lang-en">30</span><span class="price lang-ne" style="display:none;">३०</span></div>
+        <div class="item"><span class="lang lang-en">Lemon Tea</span><span class="lang lang-ne" style="display:none;">कागती चिया</span><span class="price lang-en">30</span><span class="price lang-ne" style="display:none;">३०</span></div>
+        <div class="item"><span class="lang lang-en">Hot Lemon</span><span class="lang lang-ne" style="display:none;">तातो कागती</span><span class="price lang-en">50</span><span class="price lang-ne" style="display:none;">५०</span></div>
+        <div class="item"><span class="lang lang-en">Green Tea</span><span class="lang lang-ne" style="display:none;">हरियो चिया</span><span class="price lang-en">50</span><span class="price lang-ne" style="display:none;">५०</span></div>
+        <div class="item"><span class="lang lang-en">Black Coffee</span><span class="lang lang-ne" style="display:none;">कालो कफी</span><span class="price lang-en">50</span><span class="price lang-ne" style="display:none;">५०</span></div>
+        <div class="item"><span class="lang lang-en">Milk Coffee</span><span class="lang lang-ne" style="display:none;">दूध कफी</span><span class="price lang-en">70</span><span class="price lang-ne" style="display:none;">७०</span></div>
+        <div class="item"><span class="lang lang-en">Cold Coffee</span><span class="lang lang-ne" style="display:none;">चिसो कफी</span><span class="price lang-en">100</span><span class="price lang-ne" style="display:none;">१००</span></div>
+        <div class="item"><span class="lang lang-en">Mojito</span><span class="lang lang-ne" style="display:none;">मोजिटो</span><span class="price lang-en">100</span><span class="price lang-ne" style="display:none;">१००</span></div>
+      </div>
+
+      <div class="card">
+        <h3><span class="lang lang-en">Cold Drinks</span><span class="lang lang-ne" style="display:none;">चिसो पेय</span></h3>
+        <div class="item"><span class="lang lang-en">Mineral Water</span><span class="lang lang-ne" style="display:none;">मिनरल वाटर</span><span class="price lang-en">25</span><span class="price lang-ne" style="display:none;">२५</span></div>
+        <div class="item"><span class="lang lang-en">Frooti</span><span class="lang lang-ne" style="display:none;">फ्रुटी</span><span class="price lang-en">30</span><span class="price lang-ne" style="display:none;">३०</span></div>
+        <div class="item"><span class="lang lang-en">Cold Lemon</span><span class="lang lang-ne" style="display:none;">चिसो कागती</span><span class="price lang-en">50</span><span class="price lang-ne" style="display:none;">५०</span></div>
+        <div class="item"><span class="lang lang-en">Coke / Fanta</span><span class="lang lang-ne" style="display:none;">कोक / फ्यान्टा</span><span class="price lang-en">70</span><span class="price lang-ne" style="display:none;">७०</span></div>
+        <div class="item"><span class="lang lang-en">Lassi</span><span class="lang lang-ne" style="display:none;">लस्सी</span><span class="price lang-en">110</span><span class="price lang-ne" style="display:none;">११०</span></div>
+      </div>
+
+    </div><!-- /menu-flex -->
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      <span class="lang lang-en">Crafted with &#10084; for Mo:Moz | Developed by </span>
+      <span class="lang lang-ne" style="display:none;">म:मोजका लागि &#10084; साथ बनाइएको | विकासकर्ता </span>
+      <a href="https://fitandfine.github.io/anup" target="_blank">Anup</a> |
+      <a href="#" onclick="openModal('contactModal')"><i class="fa-solid fa-phone"></i> Contact</a>
+    </p>
+  </footer>
+
+  <!-- ================= Modals ================= -->
+  <!-- Payment QR -->
+  <div id="payModal" class="modal"><div class="modal-content">
+    <span class="close" onclick="closeModal('payModal')">&times;</span>
+    <img src="esewa_qr.jpg" alt="eSewa QR">
+    <p class="lang lang-en">Scan to pay with eSewa</p>
+    <p class="lang lang-ne" style="display:none;">eSewa बाट भुक्तानी गर्न QR स्क्यान गर्नुहोस्</p>
+  </div></div>
+
+  <!-- Share / Menu QR -->
+  <div id="shareModal" class="modal"><div class="modal-content">
+    <span class="close" onclick="closeModal('shareModal')">&times;</span>
+    <img src="shop_qr.png" alt="Menu QR">
+    <p class="lang lang-en">Share this menu with friends!</p>
+    <p class="lang lang-ne" style="display:none;">यो मेनु मित्रहरूलाई सेयर गर्नुहोस् !</p>
+  </div></div>
+
+  <!-- Contact -->
+  <div id="contactModal" class="modal"><div class="modal-content">
+    <span class="close" onclick="closeModal('contactModal')">&times;</span>
+    <h3 style="margin-bottom:.6rem" class="lang lang-en">Call / Message Us</h3>
+    <h3 style="margin-bottom:.6rem;display:none" class="lang lang-ne">सम्पर्क&nbsp;गर्नुहोस्</h3>
+    <p style="font-weight:600">+977&nbsp;98XXXXXXXX</p>
+    <button class="btn" onclick="window.location.href='tel:+97798XXXXXXXX'">
+      <i class="fa-solid fa-phone"></i> <span class="lang lang-en">Call</span><span class="lang lang-ne" style="display:none;">कल</span>
+    </button>
+    <button class="btn" onclick="window.location.href='sms:+97798XXXXXXXX'">
+      <i class="fa-solid fa-message"></i> <span class="lang lang-en">SMS</span><span class="lang lang-ne" style="display:none;">एसएमएस</span>
+    </button>
+  </div></div>
+
+  <!-- ================= Scripts ================= -->
+  <script>
+    /* -------- Language Toggle ---------- */
+    function setLang(code){
+      document.querySelectorAll('.lang').forEach(el=>{
+        el.style.display = el.classList.contains('lang-'+code) ? '' : 'none';
+      });
+      document.getElementById('btn-en').classList.toggle('active',code==='en');
+      document.getElementById('btn-ne').classList.toggle('active',code==='ne');
+    }
+
+    /* -------- Simple modal helpers ------ */
+    function openModal(id){document.getElementById(id).style.display='flex'}
+    function closeModal(id){document.getElementById(id).style.display='none'}
+    window.onclick=e=>{['payModal','shareModal','contactModal'].forEach(id=>{
+      if(e.target===document.getElementById(id))closeModal(id);
+    })};
+  </script>
+</body>
+</html>
